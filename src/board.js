@@ -15,8 +15,8 @@ function Board(size) {
 
     function initializeBoard(size) {
         let board = [];
-        for (let i = 0; i++; i < size) {
-            let row =    initializeArray(size, 0);
+        for (let i = 0; i < size; i++) {
+            let row =  initializeArray(size);
             board.push(row)
         }
         return board
@@ -24,23 +24,24 @@ function Board(size) {
 
     function initializeArray(size) {
         let arr = [];
-        for (let i = 0; i++; i<size) {
+        for (let i = 0; i<size; i++) {
             arr.push(0);
         }
+
         return arr
     }
 
-    function initializeSnakePosition (snakeSize) {
-        for (let i = 0; i++; i < snakeSize) {
+    this.initializeSnakePosition = function(snakeSize) {
+        for (let i = 0; i < snakeSize; i++) {
             this.board[this.size - 1][i] = 1;
             this.snake.push(new SnakeSegment(i, this.size - 1));
         }
 
-    }
+    };
 
     this.init = function (snakeSize) {
-        this.board = initializeBoard(size);
-        initializeSnakePosition(snakeSize)
+        this.board = initializeBoard(this.size);
+        this.initializeSnakePosition(snakeSize);
     };
 
     this.popSnakeTail = function() {
@@ -48,7 +49,13 @@ function Board(size) {
     };
     this.getSnakeHead = function() {
         return this.snake[this.snake.length-1]
-    }
+    };
+
+    this.displayBoard = function() {
+      this.board.forEach(row => {
+          console.log(row)
+      })
+    };
 
     this.changeSnakeDirection = function(direction) {
         switch (direction) {
@@ -67,13 +74,13 @@ function Board(size) {
         }
     };
 
-    this.moveSnake = function(direction) {
+    this.moveSnake = function() {
         let tail = this.popSnakeTail();
         this.board[tail.y][tail.x] = 0;
         let head = this.getSnakeHead();
         let newHead;
 
-        switch (direction) {
+        switch (this.direction) {
             case DIRECTIONS.LEFT:
                 newHead = new SnakeSegment(head.x - 1, head.y);   //is it right way to get x and y from snake segment?
                 break;
@@ -88,8 +95,8 @@ function Board(size) {
                 newHead = new SnakeSegment(head.x, head.y + 1);
                 break;
         }
-
         this.snake.push(newHead)
+        this.board[newHead.y][newHead.x] = 1;
     }
 }
 
@@ -97,3 +104,6 @@ function SnakeSegment(x, y) {
     this.x = x;
     this.y = y;
 }
+
+
+export default Board;
