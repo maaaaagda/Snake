@@ -1,8 +1,8 @@
 const DIRECTIONS = {
     RIGHT: 1,
     LEFT: 2,
-    UP: 4,
-    DOWN: 3
+    UP: 3,
+    DOWN: 4
 };
 
 function Board(size, context, segmentSize) {
@@ -79,7 +79,6 @@ function Board(size, context, segmentSize) {
     };
 
     this.moveSnake = function() {
-        console.log("movesnake", this.direction)
         let tail = this.popSnakeTail();
         this.board[tail.y][tail.x] = 0;
         tail.clear(this.context, this.segmentSize);

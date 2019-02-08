@@ -45,19 +45,22 @@ import Board from "./board"
     // board.moveSnake();
     // board.displayBoard();
 
-    function render(direction) {
-        var direction = direction
-        var moveCount = 0
+    function render() {
+        var directionId = 0;
+        let directions = [3, 2, 4, 1];
+        var moveCount = 0;
         setInterval(() => {
             board.moveSnake();
-            if(moveCount % 3 == 0) {
-                direction = (direction + 1) == 5 ? 1 : (direction + 1)
+            moveCount += 1;
+            if(moveCount % 4 === 0) {
+                let direction = directions[directionId%4];
                 board.changeSnakeDirection(direction);
+                directionId = directionId + 1;
             }
 
         }, 200 * speed)
 
     }
 
-    render(1)
+    render()
 })();
