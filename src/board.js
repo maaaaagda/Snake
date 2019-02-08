@@ -12,6 +12,7 @@ function Board(size, context, segmentSize) {
     this.snake = [];
     this.context = context;
     this.segmentSize = segmentSize;
+    this.gameOver = false
 
 
 
@@ -79,15 +80,12 @@ function Board(size, context, segmentSize) {
     };
 
     this.moveSnake = function() {
-        let tail = this.popSnakeTail();
-        this.board[tail.y][tail.x] = 0;
-        tail.clear(this.context, this.segmentSize);
         let head = this.getSnakeHead();
         let newHead;
 
         switch (this.direction) {
             case DIRECTIONS.LEFT:
-                newHead = new SnakeSegment(head.x - 1, head.y);   //is it right way to get x and y from snake segment?
+                newHead = new SnakeSegment(head.x - 1, head.y);
                 break;
 
             case DIRECTIONS.RIGHT:
@@ -102,9 +100,26 @@ function Board(size, context, segmentSize) {
                 newHead = new SnakeSegment(head.x, head.y + 1);
                 break;
         }
-        this.snake.push(newHead);
-        this.board[newHead.y][newHead.x] = 1;
-        newHead.draw(this.context, "Green", this.segmentSize)
+
+        if(!this.isGameOver(newHead)) {
+            this.snake.push(newHead);
+            this.board[newHead.y][newHead.x] = 1;
+            newHead.draw(this.context, "Green", this.segmentSize);
+
+            let tail = this.popSnakeTail();
+            this.board[tail.y][tail.x] = 0;
+            tail.clear(this.context, this.segmentSize);
+        } else {
+            this.gameOver = true
+        }
+
+
+    };
+    this.isGameOver = function (newHead) {
+        return !(this.board.length > newHead.y
+        && newHead.y >= 0
+        && this.board[newHead.y].length > newHead.x
+        && newHead.x >= 0)
     };
 
 
@@ -124,6 +139,7 @@ function Board(size, context, segmentSize) {
 
             context.drawImage(canvas_snake_segment, this.x * segmentSize, this.y * segmentSize);
         };
+
         this.clear = function(context, segmentSize) {
             context.clearRect(this.x * segmentSize, this.y * segmentSize,  segmentSize, segmentSize);
         }

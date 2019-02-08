@@ -5,7 +5,7 @@ import Board from "./board"
 (function gameModule () {
     let canvas;
     let context;
-    let speed =  5;
+    let speed =  3;
 
     canvas = document.getElementById("mainGameCanvas");
     context = canvas.getContext("2d");
@@ -47,16 +47,22 @@ import Board from "./board"
 
     function render() {
         var directionId = 0;
-        let directions = [3, 2, 4, 1];
+        let directions = [4, 2, 4, 1];
         var moveCount = 0;
-        setInterval(() => {
-            board.moveSnake();
-            moveCount += 1;
-            if(moveCount % 4 === 0) {
-                let direction = directions[directionId%4];
-                board.changeSnakeDirection(direction);
-                directionId = directionId + 1;
+        let runGame = setInterval(() => {
+            if(!board.gameOver) {
+                board.moveSnake();
+                moveCount += 1;
+                if(moveCount % 12 === 0) {
+                    let direction = directions[directionId%4];
+                    board.changeSnakeDirection(direction);
+                    directionId = directionId + 1;
+                }
+            } else {
+                console.log("Game over");
+                clearInterval(runGame)
             }
+
 
         }, 200 * speed)
 
