@@ -1,3 +1,5 @@
+import { getRandomIntFromRange } from "./utils";
+
 function ObstaclesFactory(nr_of_obstacles, x_min, x_max, y_min, y_max, color) {
     this.nr_of_obstacles = nr_of_obstacles || 5;
     this.max_x = x_max || 1000;
@@ -12,12 +14,6 @@ function ObstaclesFactory(nr_of_obstacles, x_min, x_max, y_min, y_max, color) {
 
     function createObstacle(context, x, y, w, h){
         context.fillRect(x, y, w, h);
-    }
-
-    function getRandomIntFromRange(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     this.getObstacles = function () {

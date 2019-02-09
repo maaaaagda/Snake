@@ -2,71 +2,54 @@ import ObstaclesFactory from "./obstacles.js"
 import Snake from "./snake.js"
 import Board from "./board"
 
+export const KEY_DIRECTIONS_CODES = {
+    LEFT: 37,
+    RIGHT: 39,
+    UP: 38,
+    DOWN: 40
+};
+
+
 (function gameModule () {
     let canvas;
     let context;
-    let speed =  3;
+    let speed =  10;
+    let board;
 
     canvas = document.getElementById("mainGameCanvas");
     context = canvas.getContext("2d");
-    // let obstaclesFactory = new ObstaclesFactory();
-    // let obstacles = obstaclesFactory.getObstacles();
-    // context.drawImage(obstacles, 0, 0);
-
-    //
-    // let snake = new Snake(50, 1000, 500);
-    // context.drawImage(snake.getSnake(), 0 , 0);
-    //
-    let board = new Board(10, context, 50);
+    board = new Board(10, context, 50);
     board.init(3);
 
-    //
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.changeSnakeDirection(3);
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.changeSnakeDirection(2);
-    // board.moveSnake();
-    // board.displayBoard();
-    //
-    // board.changeSnakeDirection(1);
-    // board.moveSnake();
-    // board.displayBoard();
+    document.addEventListener('keydown', function(e) {
+            let keyCode = e.keyCode;
+            if (Object.values(KEY_DIRECTIONS_CODES).includes(keyCode)) {
+                e.preventDefault();
+                board.changeSnakeDirection((keyCode))
+
+            } else if(keyCode == 32 && board.gameOver) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                board = new Board(10, context, 50);
+                board.init(3);
+                render()
+            }
+        });
+
 
     function render() {
-        var directionId = 0;
-        let directions = [4, 2, 4, 1];
-        var moveCount = 0;
         let runGame = setInterval(() => {
             if(!board.gameOver) {
                 board.moveSnake();
-                moveCount += 1;
-                if(moveCount % 12 === 0) {
-                    let direction = directions[directionId%4];
-                    board.changeSnakeDirection(direction);
-                    directionId = directionId + 1;
-                }
             } else {
                 console.log("Game over");
                 clearInterval(runGame)
             }
 
 
-        }, 200 * speed)
+        }, 20 * speed)
 
     }
 
     render()
+
 })();
