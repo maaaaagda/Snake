@@ -115,16 +115,17 @@ function Board(size, context, segmentSize) {
             if(this.board[newHead.y][newHead.x] === BOARD_FIELDS.APPLE) {
                 this.applesCount += 1;
                 this.generateApple();
-
+            } else {
+                let tail = this.popSnakeTail();
+                this.board[tail.y][tail.x] = BOARD_FIELDS.EMPTY;
+                tail.clear(this.context, this.segmentSize);
             }
 
             this.snake.push(newHead);
             this.board[newHead.y][newHead.x] = BOARD_FIELDS.SNAKE;
             newHead.draw(this.context, "Green", this.segmentSize);
 
-            let tail = this.popSnakeTail();
-            this.board[tail.y][tail.x] = BOARD_FIELDS.EMPTY;
-            tail.clear(this.context, this.segmentSize);
+
 
             this.canChangeDirection = true;
 
@@ -138,7 +139,8 @@ function Board(size, context, segmentSize) {
         return !(this.board.length > newHead.y
         && newHead.y >= 0
         && this.board[newHead.y].length > newHead.x
-        && newHead.x >= 0)
+        && newHead.x >= 0
+        && this.board[newHead.y][newHead.x] !== BOARD_FIELDS.SNAKE)
     };
 
 
