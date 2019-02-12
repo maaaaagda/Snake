@@ -1,5 +1,7 @@
 import { KEY_DIRECTIONS_CODES } from "./snake_canvas"
 import { getRandomIntFromRange } from "./utils"
+import Apple from "./Apple"
+import SnakeSegment from "./SnakeSegment"
 
 const BOARD_FIELDS = {
     EMPTY: 0,
@@ -158,50 +160,6 @@ function Board(size, context, segmentSize) {
         }
     };
 
-    function SnakeSegment(x, y) {
-        this.x = x;
-        this.y = y;
-
-        this.draw = function(context, color, segmentSize) {
-            let canvas_snake_segment = document.createElement("canvas");
-            canvas_snake_segment.width = segmentSize;
-            canvas_snake_segment.height = segmentSize;
-
-            let context_snake_segment = canvas_snake_segment.getContext("2d");
-            context_snake_segment.fillStyle = color;
-            context_snake_segment.strokeStyle = color;
-            context_snake_segment.fillRect(0, 0, segmentSize, segmentSize);
-
-            context.drawImage(canvas_snake_segment, this.x * segmentSize, this.y * segmentSize);
-        };
-
-        this.clear = function(context, segmentSize) {
-            context.clearRect(this.x * segmentSize, this.y * segmentSize,  segmentSize, segmentSize);
-        }
-    }
-
-
-    function Apple(x, y) {
-        this.x = x;
-        this.y = y;
-
-        this.draw = function(context, color, segmentSize) {
-            let canvas_apple_segment = document.createElement("canvas");
-            canvas_apple_segment.width = segmentSize;
-            canvas_apple_segment.height = segmentSize;
-
-            let context_apple_segment = canvas_apple_segment.getContext("2d");
-            context_apple_segment.fillStyle = color;
-            context_apple_segment.strokeStyle = color;
-            context_apple_segment.fillRect(0, 0, segmentSize, segmentSize);
-
-            context.drawImage(canvas_apple_segment, this.x * segmentSize, this.y * segmentSize);
-        };
-
-        this.clear = function(context, segmentSize) {
-            context.clearRect(this.x * segmentSize, this.y * segmentSize,  segmentSize, segmentSize);
-        }
-    }
 }
 
 
