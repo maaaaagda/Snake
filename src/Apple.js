@@ -1,10 +1,5 @@
 import BoardObject from "./BoardObject"
 
-function Apple(x, y) {
-    BoardObject.call(this, x, y)
-}
-
-Apple.prototype = Object.create(BoardObject.prototype);
-
+let Apple = Object.create(BoardObject);
 
 export default Apple
