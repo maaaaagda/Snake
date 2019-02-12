@@ -43,8 +43,7 @@ function Board(size, context, segmentSize) {
     this.initializeSnakePosition = function(snakeSize) {
         for (let i = 0; i < snakeSize; i++) {
             this.board[this.size - 1][i] = BOARD_FIELDS.SNAKE;
-            let newSegment = Object.create(SnakeSegment);
-            newSegment.init(i, this.size - 1);
+            let newSegment = SnakeSegment.new(i, this.size - 1);
             this.snake.push(newSegment);
             newSegment.draw(this.context, "Green", this.segmentSize)
         }
@@ -98,23 +97,19 @@ function Board(size, context, segmentSize) {
 
         switch (this.direction) {
             case KEY_DIRECTIONS_CODES.LEFT:
-                newHead = Object.create(SnakeSegment);
-                newHead.init(head.x - 1, head.y);
+                newHead = SnakeSegment.new(head.x - 1, head.y);
                 break;
 
             case KEY_DIRECTIONS_CODES.RIGHT:
-                newHead = Object.create(SnakeSegment);
-                newHead.init(head.x + 1, head.y);
+                newHead = SnakeSegment.new(head.x + 1, head.y);
                 break;
 
             case KEY_DIRECTIONS_CODES.UP:
-                newHead = Object.create(SnakeSegment);
-                newHead.init(head.x, head.y - 1);
+                newHead = SnakeSegment.new(head.x, head.y - 1);
                 break;
 
             case KEY_DIRECTIONS_CODES.DOWN:
-                newHead = Object.create(SnakeSegment);
-                newHead.init(head.x, head.y + 1);
+                newHead = SnakeSegment.new(head.x, head.y + 1);
                 break;
         }
 
@@ -159,16 +154,12 @@ function Board(size, context, segmentSize) {
             if(this.board[y][x] === BOARD_FIELDS.EMPTY) {
                 appleFound = true;
                 this.board[y][x] = BOARD_FIELDS.APPLE;
-                let apple = Object.create(Apple);
-                apple.init(x, y);
+                let apple = Apple.new(x, y);
                 apple.draw(this.context, "Red", this.segmentSize);
             }
         }
     };
 
 }
-
-
-
 
 export default Board;
