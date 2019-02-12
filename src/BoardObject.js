@@ -15,6 +15,9 @@ let BoardObject = {
 
         context.drawImage(canvas, this.x * segmentSize, this.y * segmentSize);
     },
+    drawPicture: function(context, picture, segmentSize) {
+        context.drawImage(picture, this.x * segmentSize, this.y * segmentSize, segmentSize, segmentSize)
+    },
     clear: function (context, segmentSize) {
         context.clearRect(this.x * segmentSize, this.y * segmentSize, segmentSize, segmentSize);
     }

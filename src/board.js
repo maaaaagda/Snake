@@ -155,7 +155,7 @@ function Board(size, context, segmentSize) {
                 appleFound = true;
                 this.board[y][x] = BOARD_FIELDS.APPLE;
                 let apple = Apple.new(x, y);
-                apple.draw(this.context, "Red", this.segmentSize);
+                apple.drawApple(this.context, this.segmentSize);
             }
         }
     };

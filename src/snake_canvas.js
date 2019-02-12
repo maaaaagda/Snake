@@ -10,7 +10,7 @@ export const KEY_DIRECTIONS_CODES = {
 };
 
 
-(function gameModule () {
+window.onload = function () {
     let canvas;
     let context;
     let speed =  10;
@@ -20,6 +20,8 @@ export const KEY_DIRECTIONS_CODES = {
     context = canvas.getContext("2d");
     board = new Board(10, context, 50);
     board.init(3);
+
+
 
     document.addEventListener('keydown', function(e) {
             let keyCode = e.keyCode;
@@ -36,15 +38,14 @@ export const KEY_DIRECTIONS_CODES = {
         });
 
 
-    function render() {
+    function render () {
         let runGame = setInterval(() => {
             if(!board.gameOver) {
-                board.moveSnake();
-            } else {
-                console.log("Game over");
-                clearInterval(runGame)
-            }
-
+                    board.moveSnake();
+                } else {
+                    console.log("Game over");
+                    clearInterval(runGame)
+                }
 
         }, 20 * speed)
 
@@ -52,4 +53,5 @@ export const KEY_DIRECTIONS_CODES = {
 
     render()
 
-})();
+};
+
