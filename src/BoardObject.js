@@ -3,7 +3,7 @@ let BoardObject = {
         this.x = x;
         this.y = y;
     },
-    draw: function (context, color, segmentSize) {
+    drawRect: function (context, color, segmentSize) {
         let canvas = document.createElement("canvas");
         canvas.width = segmentSize;
         canvas.height = segmentSize;

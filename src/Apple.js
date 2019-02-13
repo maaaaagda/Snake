@@ -5,11 +5,11 @@ let Apple = Object.create(BoardObject);
 
 Apple.new = function(x, y) {
     let newApple = Object.create(Apple);
-    Apple.init(x, y);
+    newApple.init(x, y);
     return newApple;
 };
 
-Apple.drawApple = function(context, segmentSize) {
-    Apple.drawPicture(context, imageRepository.apple, segmentSize);
+Apple.draw = function(context, segmentSize) {
+    this.drawPicture(context, imageRepository.apple, segmentSize);
 };
 export default Apple

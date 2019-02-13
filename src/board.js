@@ -45,7 +45,7 @@ function Board(size, context, segmentSize) {
             this.board[this.size - 1][i] = BOARD_FIELDS.SNAKE;
             let newSegment = SnakeSegment.new(i, this.size - 1);
             this.snake.push(newSegment);
-            newSegment.draw(this.context, "Green", this.segmentSize)
+            newSegment.draw(this.context, this.segmentSize)
         }
 
     };
@@ -125,7 +125,7 @@ function Board(size, context, segmentSize) {
 
             this.snake.push(newHead);
             this.board[newHead.y][newHead.x] = BOARD_FIELDS.SNAKE;
-            newHead.draw(this.context, "Green", this.segmentSize);
+            newHead.draw(this.context, this.segmentSize);
 
 
 
@@ -155,7 +155,7 @@ function Board(size, context, segmentSize) {
                 appleFound = true;
                 this.board[y][x] = BOARD_FIELDS.APPLE;
                 let apple = Apple.new(x, y);
-                apple.drawApple(this.context, this.segmentSize);
+                apple.draw(this.context, this.segmentSize);
             }
         }
     };
