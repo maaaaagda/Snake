@@ -9,8 +9,9 @@ const BOARD_FIELDS = {
     APPLE: -1
 };
 
-function Board(size, context, segmentSize) {
-    this.size = size;
+function Board(sizeHorizontally, sizeVertically, segmentSize, context) {
+    this.sizeHorizontally = sizeHorizontally;
+    this.sizeVertically = sizeVertically;
     this.board = [];
     this.direction = KEY_DIRECTIONS_CODES.RIGHT;
     this.snake = [];
@@ -22,10 +23,10 @@ function Board(size, context, segmentSize) {
 
 
 
-    function initializeBoard(size) {
+    function initializeBoard(sizeH, sizeV) {
         let board = [];
-        for (let i = 0; i < size; i++) {
-            let row =  initializeArray(size);
+        for (let i = 0; i < sizeV; i++) {
+            let row =  initializeArray(sizeH);
             board.push(row)
         }
         return board
@@ -42,8 +43,8 @@ function Board(size, context, segmentSize) {
 
     this.initializeSnakePosition = function(snakeSize) {
         for (let i = 0; i < snakeSize; i++) {
-            this.board[this.size - 1][i] = BOARD_FIELDS.SNAKE;
-            let newSegment = SnakeSegment.new(i, this.size - 1);
+            this.board[this.sizeVertically - 1][i] = BOARD_FIELDS.SNAKE;
+            let newSegment = SnakeSegment.new(i, this.sizeVertically - 1);
             this.snake.push(newSegment);
             newSegment.draw(this.context, this.segmentSize)
         }
@@ -51,7 +52,7 @@ function Board(size, context, segmentSize) {
     };
 
     this.init = function (snakeSize) {
-        this.board = initializeBoard(this.size);
+        this.board = initializeBoard(this.sizeHorizontally, this.sizeVertically);
         this.initializeSnakePosition(snakeSize);
         this.generateApple();
     };

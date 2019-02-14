@@ -1,0 +1,23 @@
+
+html {
+    background-color: #b2ca00;
+}
+
+#gameContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gameInfoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+#mainGameCanvas {
+    border:3px solid #050505;
+}
+

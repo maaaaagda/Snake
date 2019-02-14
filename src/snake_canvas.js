@@ -1,6 +1,5 @@
 import ObstaclesFactory from "./obstacles.js"
-import Snake from "./snake.js"
-import Board from "./board"
+import Board from "./Board"
 
 export const KEY_DIRECTIONS_CODES = {
     LEFT: 37,
@@ -15,10 +14,23 @@ window.onload = function () {
     let context;
     let speed =  10;
     let board;
+    let boardWidth = 1000;
+    let boardHeight = 500;
+    let boardSizeHorizontally = 20;
+    let boardSizeVertically = 10;
+    let segmentSize = 50;
+    let gameInfoDiv = document.getElementById("gameInfo");
 
+    gameInfoDiv.style.width = boardWidth + "px";
     canvas = document.getElementById("mainGameCanvas");
+    canvas.width = boardWidth;
+    canvas.height = boardHeight;
+
     context = canvas.getContext("2d");
-    board = new Board(10, context, 50);
+    board = new Board(boardSizeHorizontally,
+        boardSizeVertically,
+        segmentSize,
+        context );
     board.init(3);
 
 
@@ -31,7 +43,10 @@ window.onload = function () {
 
             } else if(keyCode == 32 && board.gameOver) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
-                board = new Board(10, context, 50);
+                board = new Board(boardSizeHorizontally,
+                    boardSizeVertically,
+                    segmentSize,
+                    context );
                 board.init(3);
                 render()
             }
