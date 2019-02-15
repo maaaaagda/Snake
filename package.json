@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "webpack": "^4.29.1"
+    "webpack": "^4.29.1",
+    "serve": "^10.0.1"
   }
 }
