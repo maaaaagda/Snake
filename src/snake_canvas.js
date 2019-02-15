@@ -12,13 +12,15 @@ export const KEY_DIRECTIONS_CODES = {
 window.onload = function () {
     let canvas;
     let context;
-    let speed =  10;
     let board;
-    let boardWidth = 1000;
-    let boardHeight = 500;
-    let boardSizeHorizontally = 20;
-    let boardSizeVertically = 10;
-    let segmentSize = 50;
+    let speed =  10;
+    let sizeCoefficient = 13;
+    let segmentSize = Math.floor(Math.min(window.innerWidth/sizeCoefficient, innerHeight/sizeCoefficient));
+    let boardSizeHorizontally = Math.floor(0.8 * window.innerWidth / segmentSize);
+    let boardSizeVertically = Math.floor(0.6 * window.innerHeight / segmentSize);
+    let boardWidth = boardSizeHorizontally  * segmentSize;
+    let boardHeight = boardSizeVertically * segmentSize;
+
 
     changeHtmlStylingBasedOnBoardSize(boardWidth);
 
@@ -58,7 +60,7 @@ window.onload = function () {
 
     startGameButton.addEventListener("click", () => {
         render();
-        startGameButton.style.visibility = "hidden"
+        startGameButton.style.visibility = "hidden";
         canvas.style.opacity = "1"
     });
 
@@ -67,7 +69,6 @@ window.onload = function () {
             if(!board.gameOver) {
                     board.moveSnake();
                 } else {
-                    console.log("Game over");
                     clearInterval(runGame)
                 }
 

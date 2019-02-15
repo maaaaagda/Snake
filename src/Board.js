@@ -92,7 +92,6 @@ function Board(sizeHorizontally, sizeVertically, segmentSize, context) {
     };
 
     this.moveSnake = function() {
-        console.log("Apples: ", this.points);
         let head = this.getSnakeHead();
         let newHead;
 
