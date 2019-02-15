@@ -19,7 +19,7 @@ function Board(sizeHorizontally, sizeVertically, segmentSize, context) {
     this.segmentSize = segmentSize;
     this.gameOver = false;
     this.canChangeDirection = true;
-    this.applesCount = 0;
+    this.points = 0;
 
 
 
@@ -92,7 +92,7 @@ function Board(sizeHorizontally, sizeVertically, segmentSize, context) {
     };
 
     this.moveSnake = function() {
-        console.log("Apples: ", this.applesCount);
+        console.log("Apples: ", this.points);
         let head = this.getSnakeHead();
         let newHead;
 
@@ -116,7 +116,7 @@ function Board(sizeHorizontally, sizeVertically, segmentSize, context) {
 
         if(!this.isGameOver(newHead)) {
             if(this.board[newHead.y][newHead.x] === BOARD_FIELDS.APPLE) {
-                this.applesCount += 1;
+                this.points += 1;
                 this.generateApple();
             } else {
                 let tail = this.popSnakeTail();

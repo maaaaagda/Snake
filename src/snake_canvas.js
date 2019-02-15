@@ -19,9 +19,13 @@ window.onload = function () {
     let boardSizeHorizontally = 20;
     let boardSizeVertically = 10;
     let segmentSize = 50;
-    let gameInfoDiv = document.getElementById("gameInfo");
 
-    gameInfoDiv.style.width = boardWidth + "px";
+    changeHtmlStylingBasedOnBoardSize(boardWidth);
+
+
+    let pointsDiv = document.getElementById("points");
+    let startGameButton = document.getElementById("play")
+
     canvas = document.getElementById("mainGameCanvas");
     canvas.width = boardWidth;
     canvas.height = boardHeight;
@@ -52,6 +56,11 @@ window.onload = function () {
             }
         });
 
+    startGameButton.addEventListener("click", () => {
+        render();
+        startGameButton.style.visibility = "hidden"
+        canvas.style.opacity = "1"
+    });
 
     function render () {
         let runGame = setInterval(() => {
@@ -62,11 +71,29 @@ window.onload = function () {
                     clearInterval(runGame)
                 }
 
-        }, 20 * speed)
+        }, 20 * speed);
+        let updateStatisticsInterval = setInterval(() => {
+            if(!board.gameOver){
+                updateStatistics(board.points)
+            } else {
+                clearInterval(updateStatisticsInterval)
+            }
+        }, 10)
 
     }
 
-    render()
+    function changeHtmlStylingBasedOnBoardSize(boardWidth) {
+        let gameInfoDiv = document.getElementById("gameInfo");
+        let gameStatisticsDiv = document.getElementById("gameStatistics");
+
+        gameInfoDiv.style.width = Math.round(boardWidth/2) + "px";
+        gameStatisticsDiv.style.width = Math.round(boardWidth/2) + "px";
+    }
+
+    function updateStatistics(pointsNr) {
+        pointsDiv.innerText = pointsNr
+    }
+
 
 };
 
